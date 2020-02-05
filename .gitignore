@@ -1,0 +1,36 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log
+
+#local configs
+config/local*
+
+#pid files
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# temp files
+*.tmp
+tmp-*
+
+# Coverage directory used by tools like istanbul
+coverage
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+node_modules/
+.npm
+
+
+
+.vscode
+**/.DS_Store
+package-lock.json

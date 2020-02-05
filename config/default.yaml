@@ -1,0 +1,21 @@
+suites: ./suites
+
+logger:
+  levels:
+    default:                      warn
+    #loader:                       debug
+    runner:                       info
+    #api-client-backoffice:        debug
+    #api-client-frontend:          debug
+    #api-client-backoffice:        debug
+    #suites/fe-client-search:      debug
+
+  #TRICKY
+  #  The following settings beautify console output for dev-env.
+  #  Do not override in container envs that are expected to emit json
+  prettyPrint:                    false
+  prettyOptions:
+    ignore:                       version
+    translateTime:                true
+    levelFirst:                   true
+  #TRICKYEnd

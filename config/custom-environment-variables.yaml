@@ -1,0 +1,5 @@
+suites:               SUITES
+
+logger:
+  levels:
+    default:          DEFAULT_LOG_LEVEL

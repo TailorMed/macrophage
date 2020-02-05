@@ -1,0 +1,6 @@
+.gitignore
+.gitlab-ci.yml
+.nyc_output
+test
+config/local.yaml
+Dockerfile

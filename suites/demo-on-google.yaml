@@ -1,0 +1,40 @@
+clients:
+  request:
+    module: request-promise
+
+suites:
+  google-search:
+    homepage response time:
+      fire:
+        client:       request
+        api:          get
+        args:
+          - https://www.google.com/
+          - qs:
+              client: psy-ab
+              q:      abcd
+            resolveWithFullResponse: true
+      expect:
+        responseTime: {  "<=" : 600ms }
+        statusCode: { "=" : 200 }
+        body: { is: string }
+    search auto-complete time and results:
+      fire:
+        client:       request
+        api:          get
+        args:
+          - https://www.google.com/complete/search
+          - qs:
+              client: psy-ab
+              q:      abcd
+            json:     true
+            resolveWithFullResponse: true
+      expect:
+        responseTime: {  "<=" : 600ms }
+        statusCode: { "=" : 200 }
+        body: { is: array }
+        body.0: { "=" : abcd }
+        body.1: { is: array }
+        body.1.length: { "=": 10 }
+        body.2: { is: object }
+        body.2.q: { is: string }
