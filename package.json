@@ -1,6 +1,6 @@
 {
   "name": "macrophage",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "CLI of a sanity checks using a simple declarative macro language",
   "bin": {
     "macrophage": "bin/cli"
