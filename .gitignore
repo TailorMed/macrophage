@@ -34,3 +34,4 @@ node_modules/
 .vscode
 **/.DS_Store
 package-lock.json
+.tgz

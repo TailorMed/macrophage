@@ -1,6 +1,6 @@
 {
-  "name": "sanity-checker-cli",
-  "version": "0.5.0",
+  "name": "macrophage",
+  "version": "0.0.1",
   "description": "CLI of a sanity checks using a simple declarative macro language",
   "bin": {
     "macrophage": "bin/cli"
