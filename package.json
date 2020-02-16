@@ -37,7 +37,6 @@
   },
   "dependencies": {
     "bluebird": "^3.7.2",
-    "config": "^3.2.5",
     "error-stringify": "^0.9.0",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.15",
