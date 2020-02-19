@@ -1,6 +1,6 @@
 {
   "name": "macrophage",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "CLI of a sanity checks using a simple declarative macro language",
   "bin": {
     "macrophage": "bin/cli"
@@ -43,5 +43,9 @@
     "request": "^2.88.0",
     "require-yml": "^1.4.0",
     "yargs": "^15.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TailorMed/macrophage.git"
   }
 }
