@@ -8,6 +8,8 @@ lerna-debug.log
 
 #local configs
 config/local*
+node_modules/
+.npm
 
 #pid files
 pids
@@ -17,7 +19,7 @@ pids
 
 # temp files
 *.tmp
-tmp-*
+tmp*
 
 # Coverage directory used by tools like istanbul
 coverage
@@ -25,11 +27,6 @@ coverage
 
 # nyc test coverage
 .nyc_output
-
-node_modules/
-.npm
-
-
 
 .vscode
 **/.DS_Store
