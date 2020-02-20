@@ -1,0 +1,12 @@
+clients:
+  singleton-pkg:
+    module: demo-test-client
+
+suites:
+  using-any-api-should-work:
+    fire:
+      client: singleton-pkg
+      method: add
+      args: [ 1, 2, 3 ]
+    expect:
+      result: 6

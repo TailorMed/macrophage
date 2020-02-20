@@ -1,0 +1,51 @@
+clients:
+  singleton:
+    module: ./clients/singleton-client
+  singleton-init:
+    module: ./clients/singleton-client-requires-init
+  singleton-init-promise:
+    module: ./clients/singleton-client-init-promises
+  singleton-custom-init:
+    module:     ./clients/singleton-client-requires-init-with-custom-method
+    initMethod: initialize
+
+  singleton-factory:
+    module: ./clients/singleton-factory
+
+suites:
+  simple-singleton-patterns:
+    simple-singleton-clients:
+      fire:
+        client: singleton
+        method: api1
+      expect:
+        body.success: { = : true }
+
+    singleton-clients-that-require-init:
+      fire:
+        client: singleton-init
+        method: api1
+      expect:
+        body.success: { = : true }
+
+    singleton-clients-that-require-init-by-custom-method:
+      fire:
+        client: singleton-custom-init
+        method: api1
+      expect:
+        body.success: { = : true }
+
+    singleton-clients-whose-init-promises:
+      fire:
+        client: singleton-init
+        method: api1
+      expect:
+        body.success: { = : true }
+
+  factory-singleton-patterns:
+    simple-factory:
+      fire:
+        client: singleton-factory
+        method: api1
+      expect:
+        body:.success: { = : true }
