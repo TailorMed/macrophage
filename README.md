@@ -72,46 +72,120 @@ There are two types of logging.
  - Debugs based on `debug`, aimed to help automation-developers to understand the implictions of the constructs they create and the user-modules they provide.
 
 ## user modules
-Helper modules are clients and suite-helpers
+Helper modules are clients and suite-helpers.
+
+- Modules can be pointed as relative paths, or npm package names.
+- Absolute paths are discouraged. They work now, but only thanks to an implementation detail which is not part of the API.
+
 Supported initiation patterns:
    - singleton -the  module exports an object with methods which is the client, ready for use.
       e.g:
-      ```
+      ```javascript
       const client = require(moduleName)
       await client.operation(args)
+      ```
+      may be configured as:
+      ```yaml
+      clients:
+        axios:
+          module:     axios
+        rp:
+          module:     request-promise
       ```
    - singleton + init - the module exports an object with methods which is the client, but one of them must be called first with options as an initiation.
       e.g:
-      ```
+      ```javascript
       const client = require(moduleName)
       await client.init(initOptions)
       await client.operation(args)
       ```
+      may be configured as:
+      ```yaml
+      clients:
+        users:
+          module:           ./dal/users
+          initOptions:
+            host:           users-svc.local
+            port:           8089
+            apiKey:         ghjk-fgdsqa/32fdas-21234r==!!
+      ```
    - factory-function - the module exports a factory function is expected to be called with options and returns an instance.
       e.g:
-      ```
+      ```javascript
       const client = require(moduleName)(factoryOptions)
       await client.operation(args)
+      ```
+      may be configured as:
+      ```yaml
+      clients:
+        scheduler:
+          module:           ./dal/scheduler
+          factoryOptions:
+            host:           scheduler.local
+            port:           8094
+            apiKey:         ghjk-fgdsqa/32fdas-21234r==!!
       ```
    - factory-function + init- the module exports a factory function is expected to be called with options and returns an instance that has to be initiated.
       e.g:
-      ```
+      ```javascript
       const client = require(moduleName)(factoryOptions)
       await client.init(initOptions)
       await client.operation(args)
       ```
-   - factory-model - module exports a singleton with a factory function that returns an instance which is the client ready-for-use.
+      may be configured as:
+      ```yaml
+      clients:
+        agents:
+          module:           ./stress/agents-broker
+          factoryOptions:
+            poolSize:       64
+          initOptions:
+            env:            ci
+            port:           44911
+      ```     
+   - factory-module - module exports a singleton with a factory function that returns an instance which is the client ready-for-use.
+     
+     **NOTE:** still wip, but will be supported eventually...
       e.g:
-      ```
+      ```javascript
       const client = require(moduleName).create(factoryOptions)
       await client.operation(args)
       ```
-   - factory-model - module exports a singleton with a factory function that returns an instance which is the client, but the client must be initiated.
-      e.g:
+      may be configured as:
+      ```yaml
+      clients:
+        cache:
+          module:           async-redis
+          factoryMethod:    createClient
+          factoryOptions:
+            host:           redis.local
+            port:           6379
+            password:       makeC1W0rk!!
       ```
+   - factory-model - module exports a singleton with a factory function that returns an instance which is the client, but the client must be initiated.
+     
+     **NOTE:** still wip, but will be supported eventually...
+      e.g:
+      ```javascript
       const client = require(moduleName).create(factoryOptions)
       await client.init(initOptions)
       await client.operation(args)
+      ```
+      may be configured as:
+      ```yaml
+      clients:
+        cache:
+          module:           ./dal/counters
+          factoryMethod:    create
+          factoryOptions:
+            poolSize:       3
+            host:           redis.local
+            port:           6379
+            password:       makeC1W0rk!!
+          initMethod:       init
+          initOptions:      {}      //you have to provide it even if no params are required
+                                    //this is what causes the `initMethod` to be called.
+          
       ```
 
 ## Roadmap
